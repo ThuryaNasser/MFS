@@ -11,6 +11,7 @@ const prodConfig = {
   mode: "production",
   output: {
     filename: "[name].[contenthash].js",
+    clean: true,
   },
   plugins: [
     new ModuleFederationPlugin({

@@ -1,0 +1,46 @@
+name: Marketing CI/CD
+
+on:
+  push:
+    branches: [ main, develop ]
+    paths:
+      - 'marketing/**'
+      - 'shared.js'
+  pull_request:
+    branches: [ main, develop ]
+    paths:
+      - 'marketing/**'
+      - 'shared.js'
+
+env:
+  NODE_VERSION: 18.x
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Use Node.js ${{ env.NODE_VERSION }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ env.NODE_VERSION }}
+        cache: 'npm'
+        cache-dependency-path: 'marketing/package-lock.json'
+
+    - name: Install dependencies
+      run: cd marketing && npm install
+
+    - name: Build
+      run: cd marketing && npm run build
+
+    - name: Lint
+      run: cd marketing && npm run lint --if-present
+
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: marketing-build
+        path: marketing/dist
+        retention-days: 5
