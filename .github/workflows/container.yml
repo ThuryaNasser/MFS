@@ -30,7 +30,7 @@ jobs:
           node-version: ${{ env.NODE_VERSION }}
 
       - name: Install dependencies
-        run: cd container && npm ci
+        run: cd container && npm install
 
       - name: Build
         run: cd container && npm run build

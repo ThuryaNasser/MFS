@@ -30,7 +30,7 @@ jobs:
           node-version: ${{ env.NODE_VERSION }}
 
       - name: Install dependencies
-        run: cd marketing && npm ci
+        run: cd marketing && npm install
 
       - name: Build
         run: cd marketing && npm run build
