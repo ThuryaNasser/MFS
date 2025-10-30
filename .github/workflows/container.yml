@@ -2,15 +2,15 @@ name: Container CI/CD
 
 on:
   push:
-    branches: [ main, develop ]
+    branches: [main, develop]
     paths:
-      - 'container/**'
-      - 'shared.js'
+      - "container/**"
+      - "shared.js"
   pull_request:
-    branches: [ main, develop ]
+    branches: [main, develop]
     paths:
-      - 'container/**'
-      - 'shared.js'
+      - "container/**"
+      - "shared.js"
 
 env:
   NODE_VERSION: 18.x
@@ -20,27 +20,27 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
-    - name: Use Node.js ${{ env.NODE_VERSION }}
-      uses: actions/setup-node@v3
-      with:
-        node-version: ${{ env.NODE_VERSION }}
-        cache: 'npm'
-        cache-dependency-path: 'container/package-lock.json'
+      - name: Use Node.js ${{ env.NODE_VERSION }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: "npm"
+          cache-dependency-path: "container/package-lock.json"
 
-    - name: Install dependencies
-      run: cd container && npm install
+      - name: Install dependencies
+        run: cd container && npm install
 
-    - name: Build
-      run: cd container && npm run build
+      - name: Build
+        run: cd container && npm run build
 
-    - name: Lint
-      run: cd container && npm run lint --if-present
+      - name: Lint
+        run: cd container && npm run lint --if-present
 
-    - name: Upload build artifacts
-      uses: actions/upload-artifact@v3
-      with:
-        name: container-build
-        path: container/dist
-        retention-days: 5
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: container-build
+          path: container/dist
+          retention-days: 5
