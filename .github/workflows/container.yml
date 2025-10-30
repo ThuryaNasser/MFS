@@ -6,11 +6,13 @@ on:
     paths:
       - "container/**"
       - "shared.js"
+      - ".github/workflows/container.yml"
   pull_request:
     branches: [main, develop]
     paths:
       - "container/**"
       - "shared.js"
+      - ".github/workflows/container.yml"
 
 env:
   NODE_VERSION: 18.x

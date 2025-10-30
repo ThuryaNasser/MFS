@@ -6,11 +6,13 @@ on:
     paths:
       - "marketing/**"
       - "shared.js"
+      - ".github/workflows/marketing.yml"
   pull_request:
     branches: [main, develop]
     paths:
       - "marketing/**"
       - "shared.js"
+      - ".github/workflows/marketing.yml"
 
 env:
   NODE_VERSION: 18.x
