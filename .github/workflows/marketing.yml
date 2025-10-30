@@ -15,24 +15,22 @@ on:
       - ".github/workflows/marketing.yml"
 
 env:
-  NODE_VERSION: 18.x
+  NODE_VERSION: 20.x
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Use Node.js ${{ env.NODE_VERSION }}
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: "npm"
-          cache-dependency-path: "**/package-lock.json"
 
       - name: Install dependencies
-        run: cd marketing && npm install
+        run: cd marketing && npm ci
 
       - name: Build
         run: cd marketing && npm run build
